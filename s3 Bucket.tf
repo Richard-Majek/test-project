@@ -1,28 +1,13 @@
-# resource "aws_s3_bucket" "richard-demo-net" {
-#   bucket = "NetSPI-bucket"
+resource "aws_s3_bucket" "my_bucket"{
+    bucket  = var.bucket_name
+    acl     = var.acl_value
 
-# }
+    versioning{
+        enabled = true
+    }
 
-# resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
-#   bucket = aws_s3_bucket.richard-demo-net.id
-#   policy = data.aws_iam_policy_document.allow_access_from_another_account.json
-# }
+    tags = {
+        name = "Private Bucket for NetSPI"
+    }
 
-# data "aws_iam_policy_document" "allow_access_from_another_account" {
-#   statement {
-#     principals {
-#       type        = "AWS"
-#       identifiers = ["123456789012"]
-#     }
-
-#     actions = [
-#       "s3:GetObject",
-#       "s3:ListBucket",
-#     ]
-
-#     resources = [
-#       aws_s3_bucket.richard-demo-net.arn,
-#       "${aws_s3_bucket.richard-demo-net.arn}/*",
-#     ]
-#   }
-# }
+}
